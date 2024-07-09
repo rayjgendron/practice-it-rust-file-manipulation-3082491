@@ -1,8 +1,17 @@
+use std::fs;
+
 fn main() {
     let file_path = "file_with_lines";
 
-    // Implement the read_file function
-    //let lines: Vec<String> = read_file(&file_path).expect(&format!("Error reading file <{}>", &file_path));
+    let lines: Vec<String> = read_file(&file_path).expect(&format!("Error reading file <{}>", &file_path));
 
-    //println!("{:#?}", lines);
+    println!("{:#?}", lines);
+}
+
+fn read_file(path: &str) -> Result<Vec<String>, std::io::Error> {
+    let contents = fs::read_to_string(path)?;
+    let result: Vec<String> = 
+        contents.lines().map(|line| {line.to_string()}).collect();
+
+    Ok(result)
 }
