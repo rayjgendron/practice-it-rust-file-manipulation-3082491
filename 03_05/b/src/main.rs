@@ -1,12 +1,11 @@
 fn main() {
     let contents = String::from("This is the first line\nThe second line is a little longer\nLine 3 is short\nThe 4th line is the first non-prime\nThe 5th line has the starting five");
 
-    let words = get_words(contents);
+    let words = get_words(&contents);
 
     println!("{:?}", words);
 }
 
-fn get_words(stuff: String) -> Vec<String> {
-    let result = stuff.split_ascii_whitespace().map(|word| word.to_string()).collect();
-    result
+fn get_words(stuff: &str) -> Vec<String> {
+    stuff.split_whitespace().map(|word| word.to_string()).collect()
 }
