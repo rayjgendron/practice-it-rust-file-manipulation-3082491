@@ -10,13 +10,12 @@ fn main() {
 
 fn read_file(path: &str) -> Result<Vec<Vec<String>>, std::io::Error> {
     let contents: String = fs::read_to_string(path)?;
-    let mut outer = Vec::new();
-    for line in contents.lines() {
-        let mut inner = Vec::new();
-        for word in line.split_whitespace() {
-            inner.push(word.to_string());
-        }
-        outer.push(inner);
-    }
+    let outer: Vec<Vec<String>> = 
+        contents.lines()
+                .map(|line| {
+                    line.split_whitespace()
+                        .map(|word| word.to_string())
+                        .collect()
+                }).collect();
     Ok(outer)
 }
